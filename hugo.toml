@@ -1,0 +1,48 @@
+baseURL = 'https://soragoto.io/'
+languageCode = 'zh-cn'
+title = "言言的杂物间"
+theme = 'PaperMod'
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[params]
+defaultTheme = 'auto'
+ShowReadingTime = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowToc = false
+
+[params.homeInfoParams]
+Title = "欢迎来到言言的杂物间"
+Content = "这里是一些有的没的的东西的集合，欢迎随意浏览"
+
+[params.footer]
+text = '[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)'
+
+[menu]
+[[menu.main]]
+identifier = 'home'
+name = 'Home'
+url = '/'
+weight = 10
+
+[[menu.main]]
+identifier = 'archives'
+name = 'Archives'
+url = '/archives/'
+weight = 20
+
+[[menu.main]]
+identifier = 'tags'
+name = 'Tags'
+url = '/tags/'
+weight = 30
+
+[[menu.main]]
+identifier = 'search'
+name = 'Search'
+url = '/search/'
+weight = 40
