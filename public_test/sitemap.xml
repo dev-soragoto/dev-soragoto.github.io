@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://soragoto.io/posts/</loc>
+    <lastmod>2026-03-23T17:09:51+08:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/tags/</loc>
+    <lastmod>2026-03-23T17:09:51+08:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/posts/m500/</loc>
+    <lastmod>2026-03-23T17:09:51+08:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/tags/%E7%8E%A9%E6%9C%BA/</loc>
+    <lastmod>2026-03-23T17:09:51+08:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/</loc>
+    <lastmod>2026-03-23T17:09:51+08:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/posts/hello-hugo/</loc>
+    <lastmod>2026-03-23T02:03:23+00:00</lastmod>
+  </url><url>
+    <loc>https://soragoto.io/archives/</loc>
+  </url><url>
+    <loc>https://soragoto.io/categories/</loc>
+  </url><url>
+    <loc>https://soragoto.io/search/</loc>
+  </url>
+</urlset>

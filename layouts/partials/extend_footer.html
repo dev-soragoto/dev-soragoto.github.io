@@ -1,0 +1,11 @@
+<div id="lightbox-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;cursor:zoom-out;align-items:center;justify-content:center;">
+  <img id="lightbox-img" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px;">
+</div>
+<script>
+var ol=document.getElementById('lightbox-overlay'),li=document.getElementById('lightbox-img');
+document.querySelectorAll('a.lightbox-trigger').forEach(function(a){
+  a.addEventListener('click',function(e){e.preventDefault();li.src=a.href;li.alt=a.dataset.title||'';ol.style.display='flex';});
+});
+ol.addEventListener('click',function(){ol.style.display='none';li.src='';});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){ol.style.display='none';li.src='';}});
+</script>

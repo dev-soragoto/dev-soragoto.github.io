@@ -1,0 +1,14 @@
+.lightbox-trigger {
+  display: inline-block;
+  vertical-align: top;
+  box-shadow: none !important;
+}
+.lightbox-trigger img {
+  display: inline-block;
+  max-height: 300px;
+  width: auto;
+  cursor: zoom-in;
+  border-radius: 6px;
+  transition: opacity 0.2s;
+}
+.lightbox-trigger img:hover { opacity: 0.85; }

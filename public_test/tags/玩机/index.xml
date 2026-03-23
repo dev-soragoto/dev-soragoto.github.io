@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>玩机 on 言言的杂物间</title>
+    <link>https://soragoto.io/tags/%E7%8E%A9%E6%9C%BA/</link>
+    <description>Recent content in 玩机 on 言言的杂物间</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 23 Mar 2026 17:09:51 +0800</lastBuildDate>
+    <atom:link href="https://soragoto.io/tags/%E7%8E%A9%E6%9C%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>星海贝M500初音未来联名(Hiby M500_MIKU)折腾记录</title>
+      <link>https://soragoto.io/posts/m500/</link>
+      <pubDate>Mon, 23 Mar 2026 17:09:51 +0800</pubDate>
+      <guid>https://soragoto.io/posts/m500/</guid>
+      <description>&lt;p&gt;前段时间在Hiby国际网站买了初音联名M500，其实我本人并不是什么Hifi玩家，但是关键是，它是初音联名啊，而且买之前我发现海鲜市场上有4G版解锁拨号盘和信息功能，下单回来折腾一下。&lt;/p&gt;
+&lt;h2 id=&#34;拆箱&#34;&gt;拆箱&lt;/h2&gt;
+&lt;p&gt;什么，你以为会有图吗，网上那么多拆箱图去看一下就行了，我才懒得传图。&lt;/p&gt;
+&lt;p&gt;有点意思的是，国际版设备开机之后，BL锁直接是没锁的，要不是我收到的日期和生产日期只差一周，那我肯定怀疑买到摸摸机了，不过后面的一些探索证明了它可能的确是Hiby故意不锁的。&lt;/p&gt;
+&lt;h2 id=&#34;root-思路&#34;&gt;Root 思路&lt;/h2&gt;
+&lt;p&gt;说实话，我已经很久很久没有玩过安卓机了，我印象中的刷机还是先安装 TWRP，不过仔细回忆一下，现在似乎是用 Magisk 之类的，刚拿到机器的时候甚至有点修为尽失的感觉，还好现在还有 Claude。&lt;/p&gt;
+&lt;p&gt;言归正传，root思路都差不多，这台机器较为简单。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;9008 回读所有分区，先备份
+&lt;ul&gt;
+&lt;li&gt;这台机器并没有刷写过eFuse, 9008 可以用同 cpu 的 Firehose随便进。&lt;/li&gt;
+&lt;li&gt;关机按 prev + next 插数据线进入 9008。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;安装 Magisk。&lt;/li&gt;
+&lt;li&gt;复制回读的 init_boot 分区到手机内，用 Magisk 修补。&lt;/li&gt;
+&lt;li&gt;用 9008 或者 fastboot，爱用啥用啥，写回 init_boot。
+&lt;ul&gt;
+&lt;li&gt;关机按 next 插数据线进入 fastboot。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;启动第一屏更改&#34;&gt;启动第一屏更改&lt;/h2&gt;
+&lt;p&gt;这个设备的第一屏不知道为什么做得十分奇怪，对比度太低，再加上自己是 LCD 屏，根本看不清楚
+&lt;a href=&#34;#img-accf102caaa970ce65d217b9ae9a8e9a57caa67c&#34; class=&#34;lightbox-thumb&#34;&gt;
+  &lt;img src=&#34;1.jpg&#34; alt=&#34;1.jpg&#34; loading=&#34;lazy&#34;&gt;
+&lt;/a&gt;
+&lt;a href=&#34;#&#34; id=&#34;img-accf102caaa970ce65d217b9ae9a8e9a57caa67c&#34; class=&#34;lightbox-overlay&#34;&gt;
+  &lt;img src=&#34;1.jpg&#34; alt=&#34;1.jpg&#34;&gt;
+&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;好在上面我们已经从 9008 提取出了分区，一般来说第一屏在 splash 分区内，我们只需要用工具拆包 splash.img ，修改图片后打包再刷入就好了，完成后的样子是这样的。
+&lt;a href=&#34;#img-08fda0244b5397e030ee401fd2bea5b24f78a72b&#34; class=&#34;lightbox-thumb&#34;&gt;
+  &lt;img src=&#34;2.jpg&#34; alt=&#34;2.jpg&#34; loading=&#34;lazy&#34;&gt;
+&lt;/a&gt;
+&lt;a href=&#34;#&#34; id=&#34;img-08fda0244b5397e030ee401fd2bea5b24f78a72b&#34; class=&#34;lightbox-overlay&#34;&gt;
+  &lt;img src=&#34;2.jpg&#34; alt=&#34;2.jpg&#34;&gt;
+&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;你问我用什么工具？相信能找到这篇文章的你一定有能力找到相关的工具，实在没有的话让你的超级大脑去问问超级ai就好啦。&lt;/p&gt;
+&lt;h2 id=&#34;隐藏功能&#34;&gt;隐藏功能&lt;/h2&gt;
+&lt;p&gt;我购买的 4G 版，这里有个坑，国际版官方网站写了兼容中国网络，但是实际上它所支持的频段并不包含&lt;strong&gt;中国联通&lt;/strong&gt;，对中国移动的支持也较差，只有&lt;strong&gt;中国电信&lt;/strong&gt;是完美使用的。&lt;/p&gt;
+&lt;p&gt;作为一个播放器。理所当然是不能打电话发短信的。系统也没有自带短信和电话相关的应用，但是既然有 google play ，怎么会有人不想试试去 google play 安装一下 GMS 下的电话和短信呢？&lt;/p&gt;
+&lt;p&gt;不出所料。电话和短信安装上就能使用，丝滑。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#img-bd473197c461193ea9b6d317f4c236910d065887&#34; class=&#34;lightbox-thumb&#34;&gt;
+  &lt;img src=&#34;3.png&#34; alt=&#34;3.png&#34; loading=&#34;lazy&#34;&gt;
+&lt;/a&gt;
+&lt;a href=&#34;#&#34; id=&#34;img-bd473197c461193ea9b6d317f4c236910d065887&#34; class=&#34;lightbox-overlay&#34;&gt;
+  &lt;img src=&#34;3.png&#34; alt=&#34;3.png&#34;&gt;
+&lt;/a&gt;
+&lt;a href=&#34;#img-e3039f248dd555899a396179b51a05be377f9973&#34; class=&#34;lightbox-thumb&#34;&gt;
+  &lt;img src=&#34;4.png&#34; alt=&#34;4.png&#34; loading=&#34;lazy&#34;&gt;
+&lt;/a&gt;
+&lt;a href=&#34;#&#34; id=&#34;img-e3039f248dd555899a396179b51a05be377f9973&#34; class=&#34;lightbox-overlay&#34;&gt;
+  &lt;img src=&#34;4.png&#34; alt=&#34;4.png&#34;&gt;
+&lt;/a&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;启动器相关的折腾&#34;&gt;启动器相关的折腾&lt;/h2&gt;
+&lt;h3 id=&#34;起始&#34;&gt;起始&lt;/h3&gt;
+&lt;p&gt;其实刚开始，我是想安装个三方启动器完事的，凭自己十多年前的印象搜了一下，那个叫 Apex Launcher 的启动器多年前就不更新了。Nova Launcher 还在更新，就先装上试试看吧，唉，现在的它怎么还内嵌广告了呢……再去查了一下，原来项目已经被收购了，看起来也算名存实亡。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

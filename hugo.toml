@@ -22,7 +22,10 @@ Content = "这里是一些有的没的的东西的集合，欢迎随意浏览"
 [params.footer]
 text = '[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)'
 
-[menu]
+[markup]
+[markup.goldmark.renderer]
+unsafe = true
+
 [[menu.main]]
 identifier = 'home'
 name = 'Home'
