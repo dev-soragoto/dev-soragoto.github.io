@@ -1,15 +1,15 @@
 +++
 title = 'Ayn Thor linux(Rocknix) 的安装和折腾过程'
 date = 2026-04-24T09:20:33+08:00
-tags = ["玩机"]
+tags = ["玩机","rocknix"]
 +++
 
 就在几天前，听说 Rocknix 项目支持运行 Steam 了，立刻下单 thor 开始折腾，之前想玩双屏寨机很久了，不过想着安卓系统就算了，这能运行 linux 甚至还能跑 steam ，高低得折腾一下
 
 ## 折腾的结果
 
-1. 硬件上双屏没问题，系统前端不支持双屏，steam 等也不支持双屏，在非 ds 类模拟器运行的情况下，下屏基本算是摆设(可通过命令在下屏启动轻量的监视器等)。
-   
+1. 硬件上双屏没问题，系统前端不支持双屏，steam 等也不支持双屏，在非 ds 类模拟器运行的情况下，下屏基本算是摆设(可通过命令在下屏启动轻量的监视器等，参阅我的另一篇文章 [Rocknix 中屏幕键盘的配置](../rocknix/rocknix-1/))。
+
 2. Steam 启动非常慢(首次安装更慢)，但是启动起来后比较流畅，轻量级的游戏也非常流畅。
    
 3. 官方只支持两种 vpn ，并没有喜闻乐见的 xray 等网络工具的支持，折腾需要透明代理，或者自己想办法使用 ssh 进去运行 。
@@ -21,9 +21,9 @@ tags = ["玩机"]
 6. 兼容性差强人意，我测试过的几个游戏
 
     - 土豆兄弟(Brotato) 完美运行
-    - 尼尔：机械纪元(NieR:Automata) 能进游戏，止步于创建角色，即使我唤醒 steam 屏幕键盘，也无法输入名字，可能有创建好角色的云存档的情况下是可玩的
-    - 怪物猎人崛起(MONSTER HUNTER RISE) 闪退，我还在想办法折腾
-    - 看门狗(Watch Dogs) 报错后死机，我对运行起来不报什么希望了
+    - 尼尔：机械纪元(NieR:Automata) 能进游戏，~~止步于创建角色，即使我唤醒 steam 屏幕键盘，也无法输入名字，~~配置好  [屏幕键盘](../rocknix/rocknix-1/) 后完美运行。
+    - 怪物猎人崛起(MONSTER HUNTER RISE) 闪退，我还在想办法折腾(调整了一堆东西也没跑起来，我放弃了)。
+    - 看门狗(Watch Dogs) 报错后死机，我对运行起来不报什么希望了。
   
 
 7. 目前没有很方便的方法直接安装在 ufs 中，需要 tf 卡，我选择了把安卓的 userdata 分区切分出一部分挂载在 rocknix 上，这样可以把一些大型游戏安装在 ufs 上，提升一些运行性能。
@@ -32,7 +32,9 @@ tags = ["玩机"]
 
 ## 图
 
-会更新的，还没拍
+![](1.png)
+![](2.png)
+![](3.png)
 
 ## 折腾详情
 
@@ -204,7 +206,7 @@ WantedBy=multi-user.target
 
 存储完成后，记得 `systemctl enable mount-ufs.service` 配置开机运行
 
-做完这些，参考下面的命令建立软连接，rocknix 系统扫描游戏都是在 `roms` 目录下，所以尽量建立软连接来存储数据，不要直接在模拟器等应用中指定数据存在 `/storage/ufs/` 中，这样做的话你的游戏不会被扫描到。
+做完这些，参考下面的命令建立软链接，rocknix 系统扫描游戏都是在 `roms` 目录下，所以尽量建立软连接来存储数据，不要直接在模拟器等应用中指定数据存在 `/storage/ufs/` 中，这样做的话你的游戏不会被扫描到。
 
 ```
 SM8550:~/roms/steam #
@@ -277,7 +279,20 @@ drwxr-xr-x    8 root     root          4096 Apr 21 20:02 steamapps
 SM8550:~/roms/steam #
 ```
 
+## 系统内的其他坑
 
-### 未完待续
+### Azahar 模拟器模拟不了右键
 
-想起来了会更新，反正这个站一个月访问量也不破百，真有人看到觉得有帮助需要更新的话发我邮件催我一下就会更新的。
+说来可笑， r3 键是左键，但是 l3 键居然默认什么都没映射，导致你打开模拟器想调个缩放啥的，发现没右键，触屏长按也不行。找了很久发现其实就是 Azahar 自己的配置，编辑 `/storage/.local/share/azahar/azahar_mouse_addon.gptk` 加上 `l3 = mouse_right` 就可以了，解决后长下面这样。
+
+```
+r3 = mouse_left
+l3 = mouse_right
+right_analog_up = mouse_movement_up
+right_analog_down = mouse_movement_down
+right_analog_left = mouse_movement_left
+right_analog_right = mouse_movement_right
+mouse_scale = 6128
+```
+
+![](4.jpeg)
