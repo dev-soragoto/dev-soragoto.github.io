@@ -296,3 +296,33 @@ mouse_scale = 6128
 ```
 
 ![](4.jpeg)
+
+
+### Steam 没同步主机的时区
+
+在 Steam 大屏模式里，右上角的时间显示与我本地的时间差了十几个小时，我在 Rocknix 中已经配置好了时区，检查过 `/etc/timezone` 看到了 `Asia/Shanghai`，`date` 命令也是对的。
+
+后来才知道，Rocknix 中的 Steam 是通过 FEX（ARM 跑 x86 的兼容层）启动的，在 tools 菜单中，有 FEXConfig 用于设置，不过我没从设置中找到关于时区的设置，好在我还有 ssh，ssh 上去后找到了 FEX 自己独立的一套 ArchLinux RootFS，位置在 `/storage/.local/share/fex-emu/RootFS/ArchLinux/` ，这个容器里没有 `/etc/localtime`
+
+那修复方法就简单了：
+
+我们使用软链接先把容器内的 localtime 传进去
+
+```bash
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /storage/.local/share/fex-emu/RootFS/ArchLinux/etc/localtime
+```
+
+之后通过 profile.d 把 `TZ` 环境变量传进去，因为只改 FEX 这层的时区的话，只能保证 Steam 是对的， Steam 内的游戏启动时，还有自己的一套 Runtime，写个 TZ 做兜底。
+
+Rocknix 系统启动时会 source `/etc/profile`，后者会读取 `/storage/.config/profile.d/` 下的所有文件，在这里设置的环境变量会被后续所有进程（包括 Steam）继承。新建一个文件是最干净的做法，别试图像我一样去修改 `001-device_config`，我发现这个文件重启后会复原。
+
+```bash
+echo 'export TZ="Asia/Shanghai"' > /storage/.config/profile.d/050-timezone.sh
+```
+
+现在，时区的问题我们也解决掉了。
+
+
+## 后记
+
+买个机器上来折腾了一大堆东西，折腾好后又索然无味了，游戏还是没怎么玩，就先写到这吧，我要去启动 MHXX 了。
