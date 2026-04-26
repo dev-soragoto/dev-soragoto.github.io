@@ -1,6 +1,7 @@
 +++
 title = 'Rocknix 添加带虚拟键盘的 Shell'
 date = 2026-04-26T01:17:15+08:00
+description = "记录在 Rocknix 中添加带虚拟键盘的 Shell 入口，让 Ayn Thor 可以更优雅地使用终端。"
 tags = ["玩机","Rocknix","Ayn Thor","Sway","Wayland","虚拟键盘","Shell"]
 +++
 

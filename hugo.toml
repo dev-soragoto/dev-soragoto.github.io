@@ -1,13 +1,18 @@
 baseURL = 'https://soragoto.io/'
 languageCode = 'zh-cn'
+defaultContentLanguage = 'zh-cn'
 title = "言言的杂物间"
 theme = 'PaperMod'
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
 
+[taxonomies]
+tag = "tags"
+
 [params]
 defaultTheme = 'auto'
+description = "这里是一些有的没的的东西的集合，欢迎随意浏览"
 ShowReadingTime = true
 ShowShareButtons = false
 ShowPostNavLinks = true

@@ -1,6 +1,7 @@
 +++
 title = 'Rocknix 中屏幕键盘的配置'
 date = 2026-04-26T01:17:15+08:00
+description = "记录在 Ayn Thor 的 Rocknix 系统中配置 Sway/Wayland 屏幕键盘 wvkbd，解决无物理键盘输入问题。"
 tags = ["玩机","Rocknix","Ayn Thor","Sway","Wayland","屏幕键盘","wvkbd"]
 +++
 

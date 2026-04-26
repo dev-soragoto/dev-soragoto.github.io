@@ -1,6 +1,7 @@
 +++
 title = 'Ayn Thor Linux(Rocknix) 的安装和折腾过程'
 date = 2026-04-24T09:20:33+08:00
+description = "记录在 Ayn Thor 双屏掌机上安装 Rocknix、运行 Steam 的折腾和踩坑过程。"
 tags = ["玩机","Rocknix","Ayn Thor","Linux 掌机","Steam","FEX","双屏掌机"]
 +++
 
