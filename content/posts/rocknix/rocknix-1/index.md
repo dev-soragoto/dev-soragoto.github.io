@@ -1,12 +1,12 @@
 +++
 title = 'Rocknix 中屏幕键盘的配置'
 date = 2026-04-26T01:17:15+08:00
-tags = ["玩机","rocknix"]
+tags = ["玩机","Rocknix","Ayn Thor","Sway","Wayland","屏幕键盘","wvkbd"]
 +++
 
 ## 序言
 
-在我使用 Ayn Thor 安装 Rocknix 后，我发现这个系统没有全局的屏幕键盘，这样产生了很多不便，比如 [Ayn Thor linux(Rocknix) 的安装和折腾过程](../../ayn-thor/) 中提到的，游戏里打不了字完全无法创建角色的问题。
+在我使用 Ayn Thor 安装 Rocknix 后，我发现这个系统没有全局的屏幕键盘，这样产生了很多不便，比如 [Ayn Thor Linux(Rocknix) 的安装和折腾过程](../../ayn-thor/) 中提到的，游戏里打不了字完全无法创建角色的问题。
 
 
 ## 效果
@@ -17,7 +17,7 @@ tags = ["玩机","rocknix"]
 
 首先先看看 Rocknix 上有哪些屏幕键盘，无敌的 Gemini 告诉我说，可以试试 `wvkbd` 或者 `wvkbd-mobintl` 
 
-我们 ssh 上去看看
+我们 SSH 上去看看
 
 ```
 SM8550:~ # wvkbd-mobintl
@@ -77,9 +77,9 @@ Found 2 layers
 Resize 1240x500 1.000000, 55 layouts
 ```
 
-看起来很顺利，成功拉起来了键盘，此时其实已经可以去游戏里测试一下了，打开游戏，在 `ssh` 中拉起键盘，这时候键盘已经可以打字了，但是这样太不优雅了，我不能每次玩游戏都带个电脑运行命令拉起键盘吧，那我接个 usb 键盘可能还更快点。
+看起来很顺利，成功拉起来了键盘，此时其实已经可以去游戏里测试一下了，打开游戏，在 SSH 中拉起键盘，这时候键盘已经可以打字了，但是这样太不优雅了，我不能每次玩游戏都带个电脑运行命令拉起键盘吧，那我接个 USB 键盘可能还更快点。
 
-我得想办法给键盘做个快捷键，这样就可以在游戏中用快捷键触发了，在这之前，需要先抓到快捷键的键值，我是想用 `home` + `back` (就是机器下面那两个小的按键)，我们运行 `evtest` 选择 xbox 控制器，之后分别按下两个键看看输出。
+我得想办法给键盘做个快捷键，这样就可以在游戏中用快捷键触发了，在这之前，需要先抓到快捷键的键值，我是想用 `home` + `back` (就是机器下面那两个小的按键)，我们运行 `evtest` 选择 Xbox 控制器，之后分别按下两个键看看输出。
 
 ```
 Event: time 1777096805.111927, type 1 (EV_KEY), code 316 (BTN_MODE), value 1
@@ -197,9 +197,9 @@ if __name__ == '__main__':
     main()
 ```
 
-我把这个脚本存储为 `/storage/scripts/Smart_Listener.py`，此时，在 ssh 中执行脚本，我们已经能做到使用快捷键拉起副屏键盘了。
+我把这个脚本存储为 `/storage/scripts/Smart_Listener.py`，此时，在 SSH 中执行脚本，我们已经能做到使用快捷键拉起副屏键盘了。
 
-之后我们需要使用 Systemd 来做开机自启动，新建一个文件 `/storage/.config/system.d/kb-combo.service` 写入以下内容
+之后我们需要使用 systemd 来做开机自启动，新建一个文件 `/storage/.config/system.d/kb-combo.service` 写入以下内容
 
 ```
 [Unit]

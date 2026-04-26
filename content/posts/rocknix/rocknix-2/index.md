@@ -1,7 +1,7 @@
 +++
 title = 'Rocknix 添加带虚拟键盘的 Shell'
 date = 2026-04-26T01:17:15+08:00
-tags = ["玩机","rocknix"]
+tags = ["玩机","Rocknix","Ayn Thor","Sway","Wayland","虚拟键盘","Shell"]
 +++
 
 ## 前言

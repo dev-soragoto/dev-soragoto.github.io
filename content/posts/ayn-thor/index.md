@@ -1,34 +1,34 @@
 +++
-title = 'Ayn Thor linux(Rocknix) 的安装和折腾过程'
+title = 'Ayn Thor Linux(Rocknix) 的安装和折腾过程'
 date = 2026-04-24T09:20:33+08:00
-tags = ["玩机","rocknix"]
+tags = ["玩机","Rocknix","Ayn Thor","Linux 掌机","Steam","FEX","双屏掌机"]
 +++
 
-就在几天前，听说 Rocknix 项目支持运行 Steam 了，立刻下单 thor 开始折腾，之前想玩双屏寨机很久了，不过想着安卓系统就算了，这能运行 linux 甚至还能跑 steam ，高低得折腾一下
+就在几天前，听说 Rocknix 项目支持运行 Steam 了，立刻下单 Thor 开始折腾，之前想玩双屏寨机很久了，不过想着安卓系统就算了，这能运行 Linux 甚至还能跑 Steam ，高低得折腾一下
 
 ## 折腾的结果
 
-1. 硬件上双屏没问题，系统前端不支持双屏，steam 等也不支持双屏，在非 ds 类模拟器运行的情况下，下屏基本算是摆设(可通过命令在下屏启动轻量的监视器等，参阅我的另一篇文章 [Rocknix 中屏幕键盘的配置](../rocknix/rocknix-1/))。
+1. 硬件上双屏没问题，系统前端不支持双屏，Steam 等也不支持双屏，在非 DS 类模拟器运行的情况下，下屏基本算是摆设(可通过命令在下屏启动轻量的监视器等，参阅我的另一篇文章 [Rocknix 中屏幕键盘的配置](../rocknix/rocknix-1/))。
 
 2. Steam 启动非常慢(首次安装更慢)，但是启动起来后比较流畅，轻量级的游戏也非常流畅。
    
-3. 官方只支持两种 vpn ，并没有喜闻乐见的 xray 等网络工具的支持，折腾需要透明代理，或者自己想办法使用 ssh 进去运行 。
+3. 官方只支持两种 VPN ，并没有喜闻乐见的 Xray 等网络工具的支持，折腾需要透明代理，或者自己想办法使用 SSH 进去运行 。
    
-4. 缺少系统级中文(其实是 CJK 都缺)字体，需要自己安装，不安装的话只有游戏前端支持中文，steam 以及其他模拟器中会变为方框。
+4. 缺少系统级中文(其实是 CJK 都缺)字体，需要自己安装，不安装的话只有游戏前端支持中文，Steam 以及其他模拟器中会变为方框。
    
 5. Steam 应用内，时区没有默认设置，需要手动配置。
    
 6. 兼容性差强人意，我测试过的几个游戏
 
     - 土豆兄弟(Brotato) 完美运行
-    - 尼尔：机械纪元(NieR:Automata) 能进游戏，~~止步于创建角色，即使我唤醒 steam 屏幕键盘，也无法输入名字，~~配置好  [屏幕键盘](../rocknix/rocknix-1/) 后完美运行。
+    - 尼尔：机械纪元(NieR:Automata) 能进游戏，<del>止步于创建角色，即使我唤醒 Steam 屏幕键盘，也无法输入名字，</del>配置好  [屏幕键盘](../rocknix/rocknix-1/) 后完美运行。
     - 怪物猎人崛起(MONSTER HUNTER RISE) 闪退，我还在想办法折腾(调整了一堆东西也没跑起来，我放弃了)。
     - 看门狗(Watch Dogs) 报错后死机，我对运行起来不报什么希望了。
   
 
-7. 目前没有很方便的方法直接安装在 ufs 中，需要 tf 卡，我选择了把安卓的 userdata 分区切分出一部分挂载在 rocknix 上，这样可以把一些大型游戏安装在 ufs 上，提升一些运行性能。
+7. 目前没有很方便的方法直接安装在 UFS 中，需要 TF 卡，我选择了把安卓的 userdata 分区切分出一部分挂载在 Rocknix 上，这样可以把一些大型游戏安装在 UFS 上，提升一些运行性能。
 
-8. 安装在 tf 卡上的 rocknix 中的游戏的资源文件，会被安卓系统上的相册扫描到, 需要自己手动在 `/storage/roms` 下写一个 `.nomedia` 空文件，不要直接写在 `/storage` 下，写在这里不会生效。
+8. 安装在 TF 卡上的 Rocknix 中的游戏的资源文件，会被安卓系统上的相册扫描到，需要自己手动在 `/storage/roms` 下写一个 `.nomedia` 空文件，不要直接写在 `/storage` 下，写在这里不会生效。
 
 ## 图
 
@@ -51,11 +51,11 @@ tags = ["玩机","rocknix"]
 2. 看 [https://rocknix.org/play/install/](https://rocknix.org/play/install/) 安装。
 
 
-### 分区：把 ufs 分一些给 rocknix 
+### 分区：把 UFS 分一些给 Rocknix 
 
 **该操作不会保留安卓的用户数据，简单理解就是安卓会被恢复出厂设置**
 
-懒得整理了，看命令，你需要 ssh 进 rocknix，之后参考我的命令执行
+懒得整理了，看命令，你需要 SSH 进 Rocknix，之后参考我的命令执行
 
 ```
 SM8550:~ # cat /proc/partitions | head -n 10
@@ -181,10 +181,10 @@ SM8550:~ # Connection to 192.168.10.162 closed by remote host.
 Connection to 192.168.10.162 closed.
 ```
 
-此时重启到安卓操作，如果安卓提示分区损坏需要修复，就修复一下(会丢用户数据)，如果没提示，就进系统后恢复出厂设置(不恢复的话，安卓显示的还是 1TB， 但是实际上我已经把 500GB 分给 rocknix 了，后续可能会引发一些问题)，确认安卓没问题后，再回 rocknix 接着配置。
+此时重启到安卓操作，如果安卓提示分区损坏需要修复，就修复一下(会丢用户数据)，如果没提示，就进系统后恢复出厂设置(不恢复的话，安卓显示的还是 1TB， 但是实际上我已经把 500GB 分给 Rocknix 了，后续可能会引发一些问题)，确认安卓没问题后，再回 Rocknix 接着配置。
 
 
-回到 rocknix 后，需要格式化已经分好的区，使用 `mkfs.ext4` ，那段命令我忘记复制了，格式化完成之后，把它挂载在你喜欢的目录， 下面命令中，我的目录是 `/storage/ufs/` ，在普通 linux 下，我们编辑 `/etc/fstab` 就可以持久化挂载，重启也生效，但是在 rocknix 中，除了 `/storage` 都不可写，我们需要去新建一个 `systemd` 模块来实现自动挂载。
+回到 Rocknix 后，需要格式化已经分好的区，使用 `mkfs.ext4` ，那段命令我忘记复制了，格式化完成之后，把它挂载在你喜欢的目录， 下面命令中，我的目录是 `/storage/ufs/` ，在普通 Linux 下，我们编辑 `/etc/fstab` 就可以持久化挂载，重启也生效，但是在 Rocknix 中，除了 `/storage` 都不可写，我们需要去新建一个 `systemd` 模块来实现自动挂载。
 
 模块内容如下，我把它命名为 `mount-ufs.service` ，存储在 `/storage/.config/system.d` 中
 
@@ -206,7 +206,7 @@ WantedBy=multi-user.target
 
 存储完成后，记得 `systemctl enable mount-ufs.service` 配置开机运行
 
-做完这些，参考下面的命令建立软链接，rocknix 系统扫描游戏都是在 `roms` 目录下，所以尽量建立软连接来存储数据，不要直接在模拟器等应用中指定数据存在 `/storage/ufs/` 中，这样做的话你的游戏不会被扫描到。
+做完这些，参考下面的命令建立软链接，Rocknix 系统扫描游戏都是在 `roms` 目录下，所以尽量建立软连接来存储数据，不要直接在模拟器等应用中指定数据存在 `/storage/ufs/` 中，这样做的话你的游戏不会被扫描到。
 
 ```
 SM8550:~/roms/steam #
@@ -302,7 +302,7 @@ mouse_scale = 6128
 
 在 Steam 大屏模式里，右上角的时间显示与我本地的时间差了十几个小时，我在 Rocknix 中已经配置好了时区，检查过 `/etc/timezone` 看到了 `Asia/Shanghai`，`date` 命令也是对的。
 
-后来才知道，Rocknix 中的 Steam 是通过 FEX（ARM 跑 x86 的兼容层）启动的，在 tools 菜单中，有 FEXConfig 用于设置，不过我没从设置中找到关于时区的设置，好在我还有 ssh，ssh 上去后找到了 FEX 自己独立的一套 ArchLinux RootFS，位置在 `/storage/.local/share/fex-emu/RootFS/ArchLinux/` ，这个容器里没有 `/etc/localtime`
+后来才知道，Rocknix 中的 Steam 是通过 FEX（ARM 跑 x86 的兼容层）启动的，在 Tools 菜单中，有 FEXConfig 用于设置，不过我没从设置中找到关于时区的设置，好在我还有 SSH，SSH 上去后找到了 FEX 自己独立的一套 ArchLinux RootFS，位置在 `/storage/.local/share/fex-emu/RootFS/ArchLinux/` ，这个容器里没有 `/etc/localtime`
 
 那修复方法就简单了：
 

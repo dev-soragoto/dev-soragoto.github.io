@@ -2,10 +2,10 @@
 title = '星海贝M500初音未来联名(Hiby M500_MIKU)折腾记录'
 date = 2026-03-23T17:09:51+08:00
 draft = false
-tags = ["玩机"]
+tags = ["玩机","HiBy M500","初音未来","Android Root","Magisk","Xposed","HiFi","SRC"]
 +++
 
-前段时间在 Hiby 国际网站买了初音联名 M500 ，其实我本人并不是什么 Hifi 玩家，但是关键是，它是初音联名啊，而且买之前我发现海鲜市场上有 4G 版解锁拨号盘和信息功能，下单回来折腾一下。
+前段时间在 Hiby 国际网站买了初音联名 M500 ，其实我本人并不是什么 HiFi 玩家，但是关键是，它是初音联名啊，而且买之前我发现海鲜市场上有 4G 版解锁拨号盘和信息功能，下单回来折腾一下。
 
 ## 拆箱
 
@@ -17,10 +17,10 @@ tags = ["玩机"]
 
 说实话，我已经很久很久没有玩过安卓机了，我印象中的刷机还是先安装 TWRP ，不过仔细回忆一下，现在似乎是用 Magisk 之类的，刚拿到机器的时候甚至有点修为尽失的感觉，还好现在还有 Claude 。
 
-言归正传， root 思路都差不多，这台机器较为简单。
+言归正传， Root 思路都差不多，这台机器较为简单。
 
 1. 9008 回读所有分区，先备份
-    - 这台机器并没有刷写过 eFuse , 9008 可以用同 cpu 的 Firehose 随便进。
+    - 这台机器并没有刷写过 eFuse , 9008 可以用同 CPU 的 Firehose 随便进。
     - 关机按 prev + next 插数据线进入 9008。
 2. 安装 Magisk 。
 3. 复制回读的 init_boot 分区到手机内，用 Magisk 修补。
@@ -37,7 +37,7 @@ tags = ["玩机"]
 
 ![2.jpg](2.jpg)
 
-你问我用什么工具？相信能找到这篇文章的你一定有能力找到相关的工具，实在没有的话让你的超级大脑去问问超级ai就好啦。
+你问我用什么工具？相信能找到这篇文章的你一定有能力找到相关的工具，实在没有的话让你的超级大脑去问问超级 AI 就好啦。
 
 ## 隐藏功能
 
@@ -70,9 +70,9 @@ tags = ["玩机"]
 
 ### 图标强迫症
 
-之后我发现 launcher 的主屏幕设置，在开启初音主题时，设置里会多一个使用初音图标的选项，那我都用 xp 组件自己设置图标了我还得看着这个选项，而且这个选项的优先级还在 xp 的 hook 点之后，这我哪能忍，我得想办法给它改掉。
+之后我发现 Launcher 的主屏幕设置，在开启初音主题时，设置里会多一个使用初音图标的选项，那我都用 XP 组件自己设置图标了我还得看着这个选项，而且这个选项的优先级还在 XP 的 Hook 点之后，这我哪能忍，我得想办法给它改掉。
 
-有了想法之后，我提取了 launcher 的 app ，开始逆向。
+有了想法之后，我提取了 Launcher 的 APK ，开始逆向。
 
 提取出来先看一下签名，哈哈 AOSP 的 test key ， 这下方便了，回编译签名能直接覆盖安装，甚至因为这个 test key，还有了更多奇奇怪怪的玩法
 
@@ -162,7 +162,7 @@ PS C:\Users\soragoto\app\sdk> adb shell pm clear com.android.launcher3
     > 原先的 `setDefaultValue()` 调用会触发 SharedPreferences 写入，不能保留
 
 
-3. 阻止进入/退出设置时触发 launcher 重启
+3. 阻止进入/退出设置时触发 Launcher 重启
 
     文件路径：
     ```
@@ -171,7 +171,7 @@ PS C:\Users\soragoto\app\sdk> adb shell pm clear com.android.launcher3
 
     找到 `onSharedPreferenceChanged()` 方法。
 
-    **原始逻辑**：检测到 `pref_allowIconStyle` 变化时，将 `iconStyleChanged` 置为 `true`，`onPause()` 检测到后调用 `Process.killProcess()` 重启 launcher。
+    **原始逻辑**：检测到 `pref_allowIconStyle` 变化时，将 `iconStyleChanged` 置为 `true`，`onPause()` 检测到后调用 `Process.killProcess()` 重启 Launcher。
 
     **问题根源**：binary XML 中 `pref_allowIconStyle` 的 `defaultValue="true"` 在 preference 加载时会直接写入 SharedPreferences，触发此监听器，导致每次进设置再退出都会重启一次。
 
@@ -232,17 +232,17 @@ PS C:\Users\soragoto\app\sdk> adb shell pm clear com.android.launcher3
 
 ## 播放器的音质
 
-不是，真的有 Hifi 佬搜到这篇文章并且看到现在吗？
+不是，真的有 HiFi 佬搜到这篇文章并且看到现在吗？
 
 之前看到关于这个设备的讨论，说是无法绕过 SRC ，作为接近两千元的播放器还是不能绕过 SRC 那的确挺可惜。
 
 考虑到在上文中，我只是简单的从 Google Play 安装了拨号盘和短信，就恢复了通话和短信功能，我有理由怀疑这个设备在开发时可能代码中也有全局绕过 SRC 的相关设置，只是对用户隐藏了而已。
 
-这种设置一般来说可能存在于 settings 包中，但是从上面的逆向中我发现他们把 System UI 都打包进 launcher , 那先从 launcher 入手找一下，找不到的话再提取 setting 包找一下。
+这种设置一般来说可能存在于 Settings 包中，但是从上面的逆向中我发现他们把 System UI 都打包进 Launcher , 那先从 Launcher 入手找一下，找不到的话再提取 Settings 包找一下。
 
 结果是，很遗憾，起码在 UI 层，是没有任何 Activity 中有关于绕过全局 SRC 的设置的，它不像是原本开发了后面被隐藏，更像是真的没有开发，当然，我没有深扒 HAL 层的代码，既然 UI 层一点蛛丝马迹都没有，就不去浪费力气了。
 
-真的没有任何办法了吗？倒也不是，虽然没有真正意义上的绕过 SRC ，但是拿到了 root 的我们其实也可以修改 SRC 的采样率，这个早有其他大佬做过了，我们直接安装 [audio-misc-settings](https://github.com/Magisk-Modules-Alt-Repo/audio-misc-settings) 。
+真的没有任何办法了吗？倒也不是，虽然没有真正意义上的绕过 SRC ，但是拿到了 Root 的我们其实也可以修改 SRC 的采样率，这个早有其他大佬做过了，我们直接安装 [audio-misc-settings](https://github.com/Magisk-Modules-Alt-Repo/audio-misc-settings) 。
 
 主播主播，我装了我也不知道它到底运行了没运行，那我脑放不出来音质提高怎么办？
 
@@ -274,6 +274,6 @@ dumpsys media.audio_flinger | grep "Sample rate: 192000" -A 5
 
 ## 后记
 
-在安卓厂商日渐封闭化的今天。居然给我买到了一个**不锁BL**、**AOSP TEST KEY 签名**、**未烧录 Efuse** 的设备，这三个东西不可能在整个发布流程中没有人测试到，反而倒像是开发者之间心照不宣的默契。
+在安卓厂商日渐封闭化的今天。居然给我买到了一个**不锁BL**、**AOSP TEST KEY 签名**、**未烧录 eFuse** 的设备，这三个东西不可能在整个发布流程中没有人测试到，反而倒像是开发者之间心照不宣的默契。
 
 —— 在2026年，还能够连通的9008端口，像极了这座埋葬了玩机的赛博坟场中仍然在飞舞着的电子萤火虫。
