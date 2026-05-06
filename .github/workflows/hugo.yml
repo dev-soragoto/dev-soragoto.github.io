@@ -71,6 +71,55 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+  notify_indexnow:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Submit changed URLs to IndexNow
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'content/' 2>/dev/null || true)
+
+          URLS=()
+          BASE="https://soragoto.io"
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            path=$(echo "$file" | sed 's|^content||' | sed 's|/index\.md$|/|' | sed 's|\.md$|/|')
+            URLS+=("${BASE}${path}")
+          done <<< "$CHANGED"
+
+          # 没有内容变更时只提交首页
+          if [ ${#URLS[@]} -eq 0 ]; then
+            URLS=("${BASE}/")
+          else
+            URLS+=("${BASE}/")
+          fi
+
+          URL_JSON=$(printf '%s\n' "${URLS[@]}" | python3 -c "
+          import sys, json
+          urls = list(dict.fromkeys(line.strip() for line in sys.stdin if line.strip()))
+          print(json.dumps(urls))
+          ")
+
+          echo "Submitting URLs: $URL_JSON"
+
+          HTTP_CODE=$(curl -s -o /tmp/indexnow_resp.txt -w "%{http_code}" -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"soragoto.io\",
+              \"key\": \"50e81e649562406f9457d50b94a0efe6\",
+              \"keyLocation\": \"https://soragoto.io/50e81e649562406f9457d50b94a0efe6.txt\",
+              \"urlList\": $URL_JSON
+            }")
+
+          cat /tmp/indexnow_resp.txt
+          echo "Response code: $HTTP_CODE"
+          [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "202" ] && echo "✅ IndexNow submitted" || echo "⚠️ Unexpected: $HTTP_CODE"
+
   del_runs:
     runs-on: ubuntu-latest
     permissions:
