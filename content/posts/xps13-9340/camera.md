@@ -1,7 +1,7 @@
 +++
-title = 'Xps13-9340 在 Arch linux 上的摄像头驱动配置'
+title = 'Xps13-9340 在 Arch linux 上点亮 IPU6 摄像头折腾记录'
 date = 2026-05-06T09:33:39+08:00
-description = "记录在 Xps13-9340 上配置 ipu6 摄像头(ov02c10) 并成功点亮的过程"
+description = "记录在 Xps13-9340 上配置 ipu6 摄像头(ov02c10)，最终通过 patch HAL 成功点亮并试图提交 patch 到上游的过程"
 tags = ["玩机","XPS 13-9340","Arch Linux","摄像头","IPU6","Wayland","Shell"]
 +++
 
