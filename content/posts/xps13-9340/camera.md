@@ -948,4 +948,4 @@ sudo systemctl stop xps13-camera-bridge.service
 
 避雷 xps，thinkpad 这种假的 linux 支持吧，离了 oem 内核什么都不是，我两年前就尝试过去点亮这个破摄像头，不出意外的失败了。折腾这些玩意真的是心累，什么时候在大陆能买到 framework 就好了。
 
-既然我 patch 了 hal ，后面我也会整理一下把 patch 提交到上游(不过上游会不会收我也不知道)，让后面还想在类似环境用摄像头的人少踩几个坑。
+骂归骂，又水了一个 [RR](https://github.com/intel/ipu6-camera-hal/pull/173) ，如果上游收了的话，可能以后折腾这个的人能少踩一点坑吧。
