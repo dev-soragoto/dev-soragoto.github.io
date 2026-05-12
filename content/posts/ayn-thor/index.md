@@ -187,6 +187,10 @@ Connection to 192.168.10.162 closed.
 
 回到 Rocknix 后，需要格式化已经分好的区，使用 `mkfs.ext4` ，那段命令我忘记复制了，格式化完成之后，把它挂载在你喜欢的目录， 下面命令中，我的目录是 `/storage/ufs/` ，在普通 Linux 下，我们编辑 `/etc/fstab` 就可以持久化挂载，重启也生效，但是在 Rocknix 中，除了 `/storage` 都不可写，我们需要去新建一个 `systemd` 模块来实现自动挂载。
 
+
+<details>
+<summary>不要点开看过程了，这里有个大坑，直接看后文吧，你非要看思路的话开也可以</summary>
+
 模块内容如下，我把它命名为 `mount-ufs.service` ，存储在 `/storage/.config/system.d` 中
 
 ```
@@ -279,6 +283,15 @@ drwxr-xr-x    4 root     root          4096 Apr 21 20:06 ..
 drwxr-xr-x    8 root     root          4096 Apr 21 20:02 steamapps
 SM8550:~/roms/steam #
 ```
+
+</details>
+
+2026-05-12 更新：
+
+**不要使用上面的 systemd 挂载分区，格式化完成后，正确的做法是直接在 rocknix 的设置内进行恢复出厂设置， rocknix 会自动扫描非安卓的块，自动挂载。**
+
+**如果你使用了我上面的挂载，在下次 ota 更新，或者恢复出厂设置时，会发现你的软链接被 rocknix 搞乱掉了。**
+
 
 ## 系统内的其他坑
 
