@@ -337,6 +337,32 @@ echo 'export TZ="Asia/Shanghai"' > /storage/.config/profile.d/050-timezone.sh
 现在，时区的问题我们也解决掉了。
 
 
+### CJK 字体缺失
+
+上面说过，Steam 和模拟器里没有中文字体会变方框，修起来倒不难，就是把字体文件丢进去就完事了。
+
+去 [https://github.com/notofonts/noto-cjk/releases](https://github.com/notofonts/noto-cjk/releases) 下载 Noto Sans CJK，选 **Variable TTF** 包，解压后把下面两个文件复制到设备上：
+
+- `NotoSansCJKsc-VF.ttf` — 中/日
+- `NotoSansCJKkr-VF.ttf` — 韩文（没想到吧，韩文单独一个文件）
+
+目标目录是 `/storage/.local/share/fonts/`，需要自己创建：
+
+```bash
+mkdir -p /storage/.local/share/fonts/
+```
+
+然后用 scp 把字体传过去：
+
+```bash
+scp NotoSansCJKsc-VF.ttf NotoSansCJKkr-VF.ttf root@<设备IP>:/storage/.local/share/fonts/
+```
+
+重启 Steam，字体就生效了。
+
+如果你还想在终端里也能好好显示中文，顺手把 `Mono/NotoSansMonoCJKsc-VF.ttf` 也一起传过去就行。
+
+
 ## 后记
 
 买个机器上来折腾了一大堆东西，折腾好后又索然无味了，游戏还是没怎么玩，就先写到这吧，我要去启动 MHXX 了。
