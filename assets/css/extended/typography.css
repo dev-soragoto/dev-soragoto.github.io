@@ -1,0 +1,30 @@
+/* 正文段落首行缩进两个字。 */
+.post-content > p {
+  text-indent: 2em;
+}
+
+/* 包含图片的段落不缩进。 */
+.post-content > p:has(img) {
+  text-indent: 0;
+}
+
+/* 定义列表上下排列，适合较长的问答。 */
+.post-content dl {
+  display: block;
+}
+
+.post-content dt,
+.post-content dd {
+  width: auto;
+  text-indent: 0;
+}
+
+.post-content dd {
+  margin-inline-start: 0;
+  padding-inline-start: 0;
+  margin-top: 0.5em;
+}
+
+.post-content dd ~ dt {
+  margin-top: 1.5em;
+}

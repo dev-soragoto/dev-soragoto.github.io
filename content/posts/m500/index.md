@@ -3,6 +3,7 @@ title = '星海贝M500初音未来联名(Hiby M500_MIKU)折腾记录'
 date = 2026-03-23T17:09:51+08:00
 draft = false
 description = "记录 星海贝 HiBy M500 初音未来联名播放器的 Android Root、Magisk 安装、主题美化(手搓 Xposed 模块)、等系统功能折腾过程。"
+ShowToc = true
 tags = ["玩机","HiBy M500","初音未来","Android Root","Magisk","Xposed","HiFi","SRC"]
 +++
 

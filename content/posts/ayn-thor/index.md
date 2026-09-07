@@ -3,6 +3,7 @@ title = 'Ayn Thor Linux(Rocknix) 的安装和折腾过程'
 date = 2026-04-24T09:20:33+08:00
 description = "记录在 Ayn Thor 双屏掌机上安装 Rocknix、运行 Steam 的折腾和踩坑过程。包括重分区，字体，steam 时区，虚拟键盘等等"
 tags = ["玩机","Rocknix","Ayn Thor","Linux 掌机","Steam","FEX","双屏掌机"]
+ShowToc = true
 +++
 
 就在几天前，听说 Rocknix 项目支持运行 Steam 了，立刻下单 Thor 开始折腾，之前想玩双屏寨机很久了，不过想着安卓系统就算了，这能运行 Linux 甚至还能跑 Steam ，高低得折腾一下
